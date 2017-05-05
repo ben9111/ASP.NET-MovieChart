@@ -1,0 +1,125 @@
+﻿<!--diplay Actor details like trailer and Movie information and a chart-->
+
+@model MovieProject.Models.Actor
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Actor</h2>
+@Html.Raw(TempData["alertMessage"])   <!-- alert msg-->
+                                          
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Actor Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActorName)
+        </dd>
+
+        <dt>
+            Gender
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gender)
+        </dd>
+
+
+        <dt>
+            Category
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.catagory)
+        </dd>
+        <dd>
+            <img src=@Html.DisplayFor(model => model.ActorImage) width="300" height="300">
+        </dd>
+
+
+    </dl>
+</div>
+@foreach (var item in Model.Trailers)
+{
+
+    <p>
+        Trailer Name: @Html.DisplayFor(model => item.TrailerName)<br />
+        Date release: @Html.DisplayFor(model => item.releaseDate.Day)/@Html.DisplayFor(model => item.releaseDate.Month)/@Html.DisplayFor(model => item.releaseDate.Year)<br />
+        DirectorName: @Html.DisplayFor(model => item.DirectorName)
+        <div>
+            <img src=@Html.DisplayFor(model => item.TrailerImage) width="200" height="200" /><br />
+        </div>
+
+        @Html.ActionLink("Movie Details", "movies", new { TrailerId = item.ID, ActorId = @Html.DisplayFor(model => model.ID) }) <!-- go to movies func in the ActorsController then go to view Movie vaz sham yas bdika if shel Edit Movie-->
+
+        &nbsp
+
+        @if (User.Identity.Name.Equals("logout8@gmail.com"))
+        {
+            @Html.ActionLink("Edit Trailer", "EditTrailer", new { TrailerId = item.ID, ActorId = @Html.DisplayFor(model => model.ID) })
+        }
+
+      
+
+        @if (User.Identity.Name.Equals("logout8@gmail.com"))
+        {
+
+            @Html.ActionLink("Delete Trailer", "DeleteTrailer", new { TrailerId = item.ID, ActorId = @Html.DisplayFor(model => model.ID) })
+        }
+
+    </p>
+
+}
+
+<br />
+<br />
+
+@if (User.Identity.Name.Equals("logout8@gmail.com"))
+{
+    <!--"addTrailer" is the function activated in the controller-->
+    using (Html.BeginForm("AddTrailer", "Actors"))
+    {
+
+        <table>
+
+            <tr> @Html.Hidden("ActorID", Model.ID)
+            <tr>
+                <td>  Trailer Name: </td>
+                <td> @Html.TextBox("TrailerName")</td>
+            </tr>
+            <tr>
+                <td> Director Name: </td>
+                <td> @Html.TextBox("DirectorName")</td>
+            </tr>
+
+            <tr>
+                <td>image URL:</td>
+                <td>@Html.TextBox("TrailerImage")</td>
+            </tr>
+            <tr>
+                <td> Release Date:</td>
+                <td><input type="date" name="releaseDate" value="releaseDate"></td>
+
+            </tr>
+            <tr>
+                
+                <td>
+                    <input type="submit" value="Add Trailer" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+
+    }
+    <br />
+    <p>
+        @Html.ActionLink("Edit Actor", "Edit", new { id = Model.ID })
+    </p>
+}
+@Html.ActionLink("Back to List", "Index")
+

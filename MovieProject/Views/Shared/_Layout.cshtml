@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+<!--the setting of the page and include scripts-->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> @ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")    
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</head>
+
+<body>
+    <!--for the facebook-->
+    <script>
+        FB.getLoginStatus(function (response) {
+            if (response.status === 'connected') {
+                // the user is logged in and has authenticated your 
+                // app, and response.authResponse supplies
+                // the user's ID, a valid access token, a signed
+                // request, and the time the access token
+                // and signed request each expire
+                var uid = response.authResponse.userID;
+                var accessToken = response.authResponse.accessToken;
+            } else if (response.status === 'not_authorized') {
+                // the user is logged in to Facebook,
+                // but has not authenticated your app
+            } else {
+                // the user isn't logged in to Facebook.
+            }
+        });
+    </script>
+
+    <!--div for the facebook-->
+    <div id="fb-root"></div>
+    <script>
+        //for JavaScript SDK
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/he_IL/sdk.js#xfbml=1&version=v2.3";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <!--header-->
+    <header id="koteret">
+        <h1>MovieChart</h1>
+    </header>
+
+    <!--scripts for the google maps-->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+    <!--the menu in the top-->
+    <nav>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                                      
+                    </button>
+               
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <!--the buttons-->
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Actors", "Index", "Actors")</li>
+                        <li>@Html.ActionLink("Premieres", "Index", "Premieres")</li>
+                        <li>@Html.ActionLink("News", "News", "Home")</li>
+                        <li id="goRight">@Html.Partial("_LoginPartial")</li>
+                    </ul>
+                  
+                </div>
+            </div>
+        </div>
+     </div>
+    </nav>
+   
+ 
+    <div id="content">
+        <!--the content of each page-->
+        <div id="mainContent">
+            @RenderBody()
+        </div>
+        <!--the aside with the links-->
+        <aside>
+            <section>
+                <header>
+                    <!--btn to hide the aside-->
+                   <h3 id="PremiereHideBtn">Top 10 Movies :</h3> 
+
+                </header>
+                <ul class="asideToHide">
+                    <li>
+                        <a href="http://localhost:49395/Actors/movies/?TrailerId=12&ActorId=22"> X-Men: Apocalypse (2016) </a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:49395/Actors/movies/?TrailerId=13&ActorId=24">Warcraft (2016)</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:49395/Actors/movies?TrailerId=17&ActorId=25">Captain America: Civil War(2016) </a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:49395/Actors/movies?TrailerId=11&ActorId=17">The Reverant (2015)</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:49395/Actors/movies?TrailerId=30&ActorId=40"> Batman V Superman: Down Of Justic(2016)</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:49395/Actors/movies?TrailerId=31&ActorId=6">Alice Through the Looking Glass (2016) </a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:49395/Actors/movies?TrailerId=29&ActorId=39">Neighbors 2 (2016)</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:49395/Actors/movies?TrailerId=28&ActorId=25">DeadPool (2016)</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:49395/Actors/movies?TrailerId=33&ActorId=5">Avengers: Age of Ultron (2015)</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:49395/Actors/movies?TrailerId=34&ActorId=38">  Ant-Man (2015)</a>
+                    </li>
+
+                </ul>
+            </section>          
+        </aside>
+    </div>
+        <!--Premiere or hide the aside-->
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#PremiereHideBtn").click(function () {
+                    $(".asideToHide").toggle(100)
+                })
+            })
+        </script>
+    <!--the footer with date and our name-->
+    <footer>
+        <p>&copy; @DateTime.Now.Year Ben & Adam </p>
+    </footer>   
+</body>
+</html>

@@ -1,0 +1,240 @@
+﻿
+@{    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--header-->
+<h2>News</h2> <img src="http://www.mywatchlinks.com/MovieNewsLogo_01.jpg" width="80" height="100" /> 
+
+
+<h2><p><font color="white">Breaking News:  Who Should Be the Next 007?</font></p></h2>
+
+
+
+<!--scripts-->
+<script type="text/javascript" src="~/Scripts/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jssor.js"></script>
+<script type="text/javascript" src="~/Scripts/jssor.slider.js"></script>
+
+<!--for images gallery-->
+<script>
+    jQuery(document).ready(function ($) {
+        var options = {
+            $AutoPlay: true,                                    //Whether to auto play, to enable slidePremiere, this option must be set to true, default value is false
+            $AutoPlaySteps: 1,                                  //Steps to go for each navigation request (this options applys only when slidePremiere disabled), the default value is 1
+            $AutoPlayInterval: 5000,                            //Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
+            $PauseOnHover: 1,                                   //Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
+
+            $ArrowKeyNavigation: true,   			            //Allows keyboard (arrow key) navigation or not, default value is false
+            $SlideDuration: 2000,                                //Specifies default duration (swipe) for slide in milliseconds, default value is 500
+            $MinDragOffsetToSlide: 20,                          //Minimum drag offset to trigger slide , default value is 20
+            $SlideSpacing: 0, 					                //Space between each slide in pixels, default value is 0
+            $PlayOrientation: 1,                                //Orientation to play slide (for auto play, navigation), 1 horizental, 2 vertical, 5 horizental reverse, 6 vertical reverse, default value is 1
+            $DragOrientation: 1,                                //Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1
+
+            $BulletNavigatorOptions: {                          //Options to specify and enable navigator or not
+                $Class: $JssorBulletNavigator$,                 //Class to create navigator instance
+                $ChanceToPremiere: 2,                               //0 Never, 1 Mouse Over, 2 Always
+                $ActionMode: 3,                                 //0 None, 1 act by click, 2 act by mouse hover, 3 both, default value is 1
+                $AutoCenter: 2,                                 //Auto center navigator in parent container, 0 None, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+                $SpacingX: 10,                                  //Horizontal space between each item in pixel, default value is 0
+                $SpacingY: 10,                                   //Vertical space between each item in pixel, default value is 0
+                $Orientation: 2                                 // The orientation of the navigator, 1 horizontal, 2 vertical, default value is 1
+            },
+
+            $ArrowNavigatorOptions: {
+                $Class: $JssorArrowNavigator$,                  //Class to create arrow navigator instance
+                $ChanceToPremiere: 2,                               //0 Never, 1 Mouse Over, 2 Always
+                $AutoCenter: 0                                  //Auto center navigator in parent container, 0 None, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+            },
+
+            $ThumbnailNavigatorOptions: {
+                $Class: $JssorThumbnailNavigator$,              //Class to create thumbnail navigator instance
+                $ChanceToPremiere: 0,                               //0 Never, 1 Mouse Over, 2 Always
+            }
+        };
+
+        //create the slider
+        var jssor_slider2 = new $JssorSlider$("slider2_container", options);
+        //create the shape of the slider
+        function ScaleSlider() {
+            var parentWidth = jssor_slider2.$Elmt.parentNode.clientWidth;
+            if (parentWidth)
+                jssor_slider2.$ScaleWidth(Math.min(parentWidth, 800));
+            else
+                window.setTimeout(ScaleSlider, 30);
+        }
+        ScaleSlider();
+
+        //when we change the window
+        $(window).bind("load", ScaleSlider);
+        $(window).bind("resize", ScaleSlider);
+        $(window).bind("orientationchange", ScaleSlider);
+    });
+</script>
+
+<!--div of images gallery-->
+<div id="slider2_container" style="position: relative; width: 800px;
+        height: 400px; overflow: hidden;">
+    <!-- Loading Screen -->
+    <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+        <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+                background-color: #000; top: 0px; left: 0px;width: 100%;height:100%;">
+        </div>
+        <div style="position: absolute; display: block; background: url(../images/loading.gif) no-repeat center center;
+                top: 0px; left: 0px;width: 100%;height:100%;">
+        </div>
+    </div>
+    <!-- Slides Container -->
+    <div u="slides" style="cursor: move; position: absolute; left: 100px; top: 50px; width: 600px; height: 300px;
+            overflow: hidden;">
+        <div>
+            <img u=image src="http://blogs-images.forbes.com/scottmendelson/files/2016/05/X-Men-Apocalypse-launch-quad-poster-1200x903.jpg" />
+        </div>
+        <div>
+            <img u=image src="https://i.ytimg.com/vi/btawZLwkHE4/hqdefault.jpg" />
+        </div>
+        <div>
+            <img u=image src="http://g02.a.alicdn.com/kf/HTB1fd5AIpXXXXXAXpXXq6xXFXXX3/2015-%D7%97%D7%93%D7%A9-%D7%92-%D7%99%D7%99%D7%9E%D7%A1-%D7%91%D7%95%D7%A0%D7%93-007-spectre-%D7%A1%D7%A8%D7%98-%D7%A8%D7%9B%D7%91-40-x-60-%D7%A1-%D7%9E-priting-%D7%A4%D7%95%D7%A1%D7%98%D7%A8.jpg" />
+        </div>
+        <div>
+            <img u=image src="http://i.huffpost.com/gen/1472721/thumbs/o-SHAWSHANK-REDEMPTION-facebook.jpg" />
+        </div>
+        <div>
+            <img u=image src="http://i.imgur.com/x0Ia6gh.jpg" />
+        </div>
+        <div>
+            <img u=image src="http://static.terof.net/blog/2a5ae6f4c465bb16517a7b7fb0cab248.jpg" />
+        </div>
+        <div>
+            <img u=image src="http://www.fisheye.co.il/wp-content/uploads/2012/12/usual-suspects-line-up.jpg" />
+        </div>
+        <div>
+            <img u=image src="http://www.comece.me/wp-content/uploads/2014/07/forrestgump.jpg" />
+        </div>
+    </div>
+    <div u="navigator" class="jssorb01" style="bottom: 16px; right: 10px;">
+        <!-- bullet navigator item prototype -->
+        <div u="prototype"></div>
+    </div>
+
+
+    <style>
+        .jssorb01 {
+            position: absolute;
+        }
+
+            .jssorb01 div, .jssorb01 div:hover, .jssorb01 .av {
+                position: absolute;
+                /* size of bullet elment */
+                width: 12px;
+                height: 12px;
+                filter: alpha(opacity=70);
+                opacity: .7;
+                overflow: hidden;
+                cursor: pointer;
+                border: #000 1px solid;
+            }
+
+            .jssorb01 div {
+                background-color: gray;
+            }
+
+                .jssorb01 div:hover, .jssorb01 .av:hover {
+                    background-color: #d3d3d3;
+                }
+
+            .jssorb01 .av {
+                background-color: #fff;
+            }
+
+            .jssorb01 .dn, .jssorb01 .dn:hover {
+                background-color: #555555;
+            }
+
+        .jssora05l, .jssora05r {
+            display: block;
+            position: absolute;
+            /* size of arrow element */
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            background: url(../images/arrowsPic.png) no-repeat;
+            overflow: hidden;
+        }
+
+        .jssora05l {
+            background-position: -10px -40px;
+        }
+
+        .jssora05r {
+            background-position: -70px -40px;
+        }
+
+        .jssora05l:hover {
+            background-position: -130px -40px;
+        }
+
+        .jssora05r:hover {
+            background-position: -190px -40px;
+        }
+
+        .jssora05l.jssora05ldn {
+            background-position: -250px -40px;
+        }
+
+        .jssora05r.jssora05rdn {
+            background-position: -310px -40px;
+        }
+    </style>
+    <!-- Arrow Left -->
+    <span u="arrowleft" class="jssora05l" style="bottom: 60px; left: 330px;">
+    </span>
+    <!-- Arrow Right -->
+    <span u="arrowright" class="jssora05r" style="bottom: 60px; right: 330px">
+    </span>
+</div>
+
+<!--the news-->
+<div>
+    <table>
+        <tr>
+            <td>
+                <a href="http://www.imdb.com/list/ls061605763/#1">
+                    <div id="transDemo3">
+                        <div class="hover">
+                            <img class="TransationImage" src="http://blogs-images.forbes.com/markhughes/files/2015/05/MAD-MAX-FURY-ROAD-15-1940x1280.png" height="200" width="200" title="<Hit the Road With 10 Classic Road Trip Movies">
+                        </div>
+                    </div>
+                </a>
+            </td>
+            <td>
+                <a href="http://www.imdb.com/poll/ZIVV7VpiGLA/results">
+                    <div id="transDemo3">
+                        <div class="hover">
+                            <img class="TransationImage" src="http://blogs-images.forbes.com/benjaminmoore/files/2015/09/Daniel-Craig-Leaving-James-Bond.jpg" height="200" width="200" title="Who Should Be the Next 007? vote now!">
+                        </div>
+                    </div>
+                </a>
+            </td>
+            <td>
+                <a href="http://www.imdb.com/imdbpicks/22-things-to-know-about-et-extra-terrestrial/ls063023452?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=2524772302&pf_rd_r=0HQB2979P6YAY6G458PC&pf_rd_s=center-8&pf_rd_t=15061&pf_rd_i=homepage&ref_=hm_pks_et_hd">
+                    <div id="transDemo3">
+                        <div class="hover">
+                            <img class="TransationImage" src="http://ia.media-imdb.com/images/M/MV5BMTM4MTk0MDg1MF5BMl5BanBnXkFtZTYwNzg4ODQ3._V1_.jpg" height="200" width="200" title="22 Facts You May Not Know About 'E.T''">
+                        </div>
+                    </div>
+                </a>
+            </td>
+            <td>
+                <a href="http://www.cinemablend.com/news/1522730/who-the-dude-who-played-deadpool-in-x-men-origins-says-you-should-blame">
+                    <div id="transDemo3">
+                        <div class="hover">
+                            <img class="TransationImage" src="http://wegotthiscovered.com/wp-content/uploads/deadpool-wolverine-movie1-600x375.jpg" height="200" width="200" title="Who The Dude Who Played Deadpool In X-Men?">
+                        </div>
+                    </div>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>

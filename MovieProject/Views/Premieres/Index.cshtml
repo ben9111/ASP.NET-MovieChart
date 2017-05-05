@@ -1,0 +1,227 @@
+﻿@model IEnumerable<MovieProject.Models.Premiere>
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+  <!-- code for presenting all the Premieres-->
+    <script type="text/javascript">
+    $(document).ready(function () {
+        // Making 2 variable month and day
+        var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+
+        // make single object
+        var newDate = new Date();
+        // make current time
+        newDate.setDate(newDate.getDate());
+        // setting date and time
+        $('#Date').html(dayNames[newDate.getDay()] + " " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+
+        setInterval(function () {
+            // Create a newDate() object and extract the seconds of the current time on the visitor's
+            var seconds = new Date().getSeconds();
+            // Add a leading zero to seconds value
+            $("#sec").html((seconds < 10 ? "0" : "") + seconds);
+        }, 1000);
+
+        setInterval(function () {
+            // Create a newDate() object and extract the minutes of the current time on the visitor's
+            var minutes = new Date().getMinutes();
+            // Add a leading zero to the minutes value
+            $("#min").html((minutes < 10 ? "0" : "") + minutes);
+        }, 1000);
+
+        setInterval(function () {
+            // Create a newDate() object and extract the hours of the current time on the visitor's
+            var hours = new Date().getHours();
+            // Add a leading zero to the hours value
+            $("#hours").html((hours < 10 ? "0" : "") + hours);
+        }, 1000);
+    });
+</script>
+<div class="clock">
+    <div id="Date"></div>
+    <ul>
+        <li id="hours"></li>
+        <li id="point">:</li>
+        <li id="min"></li>
+        <li id="point">:</li>
+        <li id="sec"></li>
+    </ul>
+</div>
+
+
+
+
+
+<div id="transDemo2"> <!--this is for our spinning cirycle in Piremires, we can see our script in Site.css-->
+    <div class="hover">
+        <img src="http://s33.postimg.org/sod58593z/Star_spinning_not.gif" width="35" height="35">
+    </div>
+    <div class="hover">
+        <img src="http://s33.postimg.org/sod58593z/Star_spinning_not.gif" width="35" height="35">
+    </div>
+    <div class="hover">
+        <img src="http://s33.postimg.org/sod58593z/Star_spinning_not.gif" width="35" height="35">
+    </div>
+    <div class="hover">
+        <img src="http://s33.postimg.org/sod58593z/Star_spinning_not.gif" width="35" height="35">
+    </div>
+    </div>
+
+    <h2> Premieres!!</h2>
+    <!-- picture intro , with radius border-->
+    <img id="intro" src="http://cdn3.thr.com/sites/default/files/imagecache/scale_crop_768_433/2016/03/89862346.jpg" height="300" width="800" />
+
+    <br />
+    <br />
+    @if (User.Identity.Name.Equals("logout8@gmail.com"))
+    {
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    }
+    @using (Html.BeginForm())
+    {
+        <p>
+            Search By Name: @Html.TextBox("searchString")<br />
+            <input type="submit" value="Filter" />
+        </p>
+    }
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PremiereName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PremiereDate)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.locationName)
+            </th>
+            <th>
+
+                @Html.DisplayNameFor(model => model.participants)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PremiereName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PremiereDate.Day)/@Html.DisplayFor(modelItem => item.PremiereDate.Month)/@Html.DisplayFor(modelItem => item.PremiereDate.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.locationName)
+            </td>
+            <!-- <td>
+                 @Html.DisplayFor(modelItem => item.locationX)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.locationY)
+             </td>-->
+            <td>
+                @Html.DisplayFor(mdelItem => item.participants)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.ID })
+            &nbsp;
+            @if (User.Identity.Name.Equals("logout8@gmail.com"))
+{
+
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+
+
+              }
+            &nbsp;
+            @if (User.Identity.Name.Equals("logout8@gmail.com"))
+              {
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    }
+        </td>
+    </tr>
+        }
+
+    </table>
+    <!-- code for the map-->
+    <!--
+    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:440px;width:700px;'><div id='gmap_canvas' style='height:440px;width:700px;'></div><div><small><a href="http://embedgooglemaps.com">									embed google maps 							</a></small></div><div><small><a href="https://privacypolicytemplate.net">privacy policy example</a></small></div>
+    <style>
+        #gmap_canvas img {
+            max-width: none !important;
+            background: none !important;
+        }
+    </style></div>
+    -->
+
+    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:440px;width:700px;'>
+        <div id='gmap_canvas' style='height:440px;width:700px;'></div><div><small><a href="http://embedgooglemaps.com">									embed google maps 							</a></small></div><div><small><a href="https://privacypolicygenerator.info">privacy policy generator</a></small></div>
+        <style>
+            #gmap_canvas img {
+                max-width: none !important;
+                background: none !important;
+            }
+        </style>
+    </div>
+    <script type='text/javascript'>function init_map() { var myOptions = { zoom: 10, center: new google.maps.LatLng(34.0928092, -118.32866139999999), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(34.0928092, -118.32866139999999) }); infowindow = new google.maps.InfoWindow({ content: '<p style="color:black"<strong>Premire</strong><br>HollyWood Alice In Wonderland 23/5/2016<br></p>' }); google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); }); infowindow.open(map, marker); } google.maps.event.addDomListener(window, 'load', init_map);</script>
+
+    <!--
+        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAstFn-g4f7qAckYMyhRmMNvJ57Vr91ypA&sensot=false" type="text/javascript"></script>
+        <div id="map_canvas" style="width: 500px; height: 400px;"></div>
+        <style>
+            .infoDiv {
+                height: 120px;
+                width: 130px;
+                -webkit-user-select: none;
+                background-color: white;
+            }
+        </style>
+        <script type="text/javascript">
+
+            google.maps.visualRefresh = true;
+            var myCenter = new google.maps.LatLng(34.1015, -118.3268);
+            var mapOptions = {
+                zoom: 14,
+                center: myCenter,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            // canvas for the map
+            var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+            var jsonLocations;
+            // use ajax to read the Json (the date of the locations) from the controllers
+            $.ajax({
+                type: 'GET',
+                url: '/Premieres/getLocs',
+                contentType: 'application/json; charset=utf-8',
+                async: false,
+                success: function (data) {
+                    jsonLocations = data;
+                    dofunc();
+                },
+                failure: function (msg) {
+                    alert("fail");
+                    $('#output').text(msg);
+                }
+            });
+            function dofunc() {
+
+                for (item in jsonLocations)
+                {
+                    //Show the data from the Json as locations on the map Premire
+                    var marker = new google.maps.Marker({
+                        'position': new google.maps.LatLng(jsonLocations[item].placeX, jsonLocations[item].placeY),
+                        'map': map,
+                        'title': jsonLocations[item].placeName
+                    });
+                }
+
+            }
+
+        </script>
+    -->

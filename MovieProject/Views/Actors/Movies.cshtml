@@ -1,0 +1,112 @@
+﻿<!--Movie details-->
+@model MovieProject.Models.Trailer
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Raw(TempData["alertMessage"])
+<h2>Movies</h2>
+
+
+@foreach (var item in Model.Movies)
+{
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => item.MovieName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => item.MovieName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => item.stars)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.stars)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => item.writer)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.writer)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => item.brief)
+            </dt>
+            <dd>
+                <p><div class="MultipleColumns">
+                     @Html.DisplayFor(model => item.brief)
+            </div>
+                </p>
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => item.videoLink)
+            </dt>
+            <dd>
+                
+                 
+            
+                    <iframe width="350" height="350" frameborder="0" src=@Html.DisplayFor(model => item.videoLink)> </iframe>
+              
+            </dd>
+        </dl>
+    </div>
+    <p>
+        @if (User.Identity.Name.Equals("logout8@gmail.com"))
+        {
+            @Html.ActionLink("Delete Movie", "DeleteMovie", new { MovieId = @Html.DisplayFor(model => item.ID), TrailerId = @Html.DisplayFor(model => item.TrailerID) })
+        }
+        &nbsp
+        @if (User.Identity.Name.Equals("logout8@gmail.com"))
+        {
+            @Html.ActionLink("Edit Movie", "EditMovie", new { MovieId = @Html.DisplayFor(model => item.ID), TrailerId = @Html.DisplayFor(model => item.TrailerID) })
+        }
+    </p>
+}
+
+    @Html.ActionLink("Back to List", "Index")
+
+@if (User.Identity.Name.Equals("logout8@gmail.com"))
+{
+    using (Html.BeginForm("AddMovie", "Actors"))
+    {
+            <table>
+                <tr> @Html.Hidden("TrailerID", Model.ID)
+                <tr>
+                    <td>  name: </td>
+                    <td> @Html.TextBox("MovieName")</td>
+                </tr>
+                <tr>
+                    <td>writer:</td>
+                    <td>@Html.TextBox("writer")</td>
+                </tr>
+                <tr>
+                    <td> stars:</td>
+                    <td>@Html.TextBox("stars")</td>
+                </tr>
+                <tr>
+                    <td>  video Link: </td>
+                    <td> @Html.TextBox("videoLink")</td>
+                </tr>
+                <tr>
+                    <td> brief: </td>
+                  
+                    <td >@Html.TextArea("brief")</td>
+                 
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Add Movie " />
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+    }
+}
+
+
+
+       
+

@@ -1,0 +1,84 @@
+﻿<!--searcher for Trailer and Actor properties, cross the info-->
+@model IEnumerable<MovieProject.Models.Trailer>
+
+    @{
+        ViewBag.Title = "TrailerActorearch";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h3>Trailer and Actor Searcher</h3>
+
+    @using (Html.BeginForm())
+    {
+        <p>
+            <table>
+                <tr>
+                    <td>Actor Name:</td>
+                    <td>@Html.TextBox("ActorName")</td>
+                </tr>
+                <tr>
+                    <td>Category:</td>
+                    <td>@Html.TextBox("category")</td>
+                </tr>
+                <tr>
+                    <td>From Date:</td>
+                    <td><input type="date" name="relDate" value="relDate"></td>
+                </tr>
+            </table>       
+            <br />
+            <input type="submit" value="Filter" />
+        </p>
+    }
+    <table class="table">
+        <tr>
+            <th>
+
+
+            </th>
+            <th>
+                Actor Name
+
+            </th>
+            <th>
+                Categoty
+            </th>
+
+            <th>
+                Release Date
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src=@Html.DisplayFor(modelItem => item.TrailerImage) height="200" width="200">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Actor.ActorName)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.Actor.catagory)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.releaseDate.Day)/@Html.DisplayFor(modelItem => item.releaseDate.Month)/@Html.DisplayFor(modelItem => item.releaseDate.Year)
+                </td>
+                <td>
+                    @if (User.Identity.Name.Equals("logout8@gmail.com"))
+                    {
+                        @Html.ActionLink("EditTrailer", "EditTrailer", new { TrailerId = item.ID, ActorId = item.ActorID })
+                    }&nbsp
+                    @if (User.Identity.Name.Equals("logout8@gmail.com"))
+                    {
+                        @Html.ActionLink("DeleteTrailer", "DeleteTrailer", new { TrailerId = item.ID, ActorId = item.ActorID })
+                    }&nbsp
+                    @Html.ActionLink("Movie Details", "movies", new { TrailerId = item.ID, ActorId = item.ActorID }) <!-- this is the link the user press! after he is in the TrailerActorSearch area, we insert the trailerID , and then the acterid shel ha item  and then he go to function movies in the ActorController-->
+                </td>
+            </tr>
+        }
+
+    </table>
+

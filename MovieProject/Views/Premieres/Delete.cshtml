@@ -1,0 +1,74 @@
+﻿@model MovieProject.Models.Premiere
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete Premiere</h2>
+<!-- code for delete conformation view , present the Premiere and ask the user if he/shes like to delete-->
+<h3>Are you sure you want to delete this?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PremiereName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PremiereName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PremiereDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PremiereDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.locationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.locationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.locationX)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.locationX)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.locationY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.locationY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.participants)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.participants)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <!-- code real delete from the controler -->
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

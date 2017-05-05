@@ -1,0 +1,409 @@
+﻿/*general*/
+* {
+    margin:0;
+    padding:0
+}
+
+header,footer,section,aside,nav,article {
+   /*default font*/
+     font-family:'Comic Sans MS';
+    /* Tell the browser to render HTML 5 elements as block */
+    display:block;
+     
+}
+
+/*name of website with shadow*/
+#koteret {
+    text-shadow:3px 3px #DDD;
+}
+
+/*general body*/
+body {
+    /*The padding clears an area around the content (inside the border) of an element. */
+    padding-top: 50px;
+    padding-bottom: 100px;
+    /*The margin clears an area around an element (outside the border)*/
+    margin:0 auto;
+    /*width*/
+    width:940px; /*940*/
+    /*deafault font*/
+    font-family:'Comic Sans MS';
+    /*background image fixed-The element is positioned relative to the browser window*/
+    background:url("http://stack-up.org/wp-content/uploads/2016/05/Marvels-Captain-America-Civil-War-2016-Official-Wallpapers-HD-1.jpg") fixed;
+    /*background size cover-Scale the background image to be as large as possible so that the background area is completely covered by the background image*/
+    background-size:  cover;
+    color:#ffffff /*this is the color of the write*/
+}
+
+/*define font-name and src*/
+@font-face {
+    font-family: myFirstFont;
+    src: url(../fonts/Chunkfive.otf);
+}
+
+/*define headers-h2*/
+h2 {
+    /*font*/
+    font-family: myFirstFont;
+    font-size:40px;
+    /*size*/
+    line-height:44px;
+     /*The padding clears an area around the content (inside the border) of an element. */
+    padding:22px 0;
+}
+
+/*define the content of the body*/
+.body-content {
+     /*font*/
+    font-family:'Comic Sans MS';
+    /*The padding clears an area around the content (inside the border) of an element. */
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/*define header-h1*/
+h1{
+     /*font*/
+    font-family:'Comic Sans MS';
+    font-size:40px;
+     /*size*/
+    line-height:44px;
+    /*The padding clears an area around the content (inside the border) of an element. */
+    padding:22px 0;
+}
+
+/*define header-h3*/
+h3 {
+     /*font*/
+    font-family:'Comic Sans MS';
+    font-size:25px;
+     /*size*/
+    line-height:22px;
+    /*The padding clears an area around the content (inside the border) of an element. */
+    padding:11px 0;
+}
+
+/*define paragraph*/
+p {
+    /*The padding clears an area around the content (inside the border) of an element. */
+    padding-bottom:22px;
+}
+
+/*define nav*/
+nav {
+   /*fixed-The element is positioned relative to the browser window*/ 
+    position:fixed;
+    left:0;
+    width:100%;
+    /*text go to left side*/
+    text-align:left;
+    /*layers-put the nav in top of all*/
+    z-index: 1;
+}
+
+/*define list*/
+.list {
+      /*text go to left side*/
+    text-align:left;
+}
+
+/*define list in nav*/
+nav ul {
+     /*font*/
+    font-family:'Comic Sans MS';
+    font-size:20px;
+      /*The margin clears an area around an element (outside the border)*/
+    margin:0 auto;
+    /*width*/
+    width:940px;
+    list-style:none;
+}
+
+/*define item in the list*/
+nav ul li {
+    /*go to left direction*/
+    float:left;
+}
+
+/*log in-location*/
+#goRight
+{
+     /*The margin clears an area around an element (outside the border)*/
+    margin-right:-800px;  
+     /*text go to right side*/
+    text-align:right;
+      /*go to right direction*/
+    float:right;
+}
+#intro {
+   /*The margin clears an area around an element (outside the border)*/
+    margin-top:0px;
+     /*The padding clears an area around the content (inside the border) of an element. */
+    padding:0px;
+    /*border radius*/
+    -moz-border-radius:22px;
+    -webkit-border-radius:22px;
+    /*layers-put the intro under anything else*/
+    z-index:-1;
+}
+
+/*define the content*/
+#content {   
+    /*display as table*/
+    display:table
+}
+
+/*define the main content*/
+#mainContent {
+     /*display as table*/
+    display:table-cell;
+    /*width*/
+    width:700px;
+    /*The padding clears an area around the content (inside the border) of an element. */
+    padding-right:22px
+}
+
+/*define the aside*/
+aside {
+    /*fixed-The element is positioned relative to the browser window*/ 
+    position:fixed;
+      /*display as table*/
+    display:table-cell;
+    /*distance from top border*/
+   top:51px;
+     /*distance from right border*/
+   right:-10px;
+   /*width*/
+    width:300px;
+    /*font*/
+   font-size:15px;
+    /*background of aside*/
+    background:#ffd800;
+}
+
+/*define the scetion in the aside*/
+aside section {
+     /*The margin clears an area around an element (outside the border)*/
+    margin:22px 0 0 22px;
+    /*The padding clears an area around the content (inside the border) of an element. */
+    padding:11px 22px;
+}
+
+/*define the list in the scetion in the aside*/
+aside section ul {
+     /*The margin clears an area around an element (outside the border)*/
+    margin:0 0 0 22px;
+    /*list style*/
+    list-style:none;
+}
+
+/*define the link in the aside*/ /*bazad */
+aside section ul li a {
+    /*Displays an element as a block element (like <p>)*/
+    display:block;
+    /*text decoration*/
+    text-decoration:none;
+    /*tetx color*/
+    color:#000;
+}
+
+/*define eoll over on the link*/
+aside section ul li a:hover {
+    /*text decoration*/
+    text-decoration:underline;
+}
+
+/*define the footer -tahton*/
+footer {
+    /*fixed-The element is positioned relative to the browser window*/ 
+    position:fixed;
+    /*distance from bottom*/
+    bottom:0;
+     /*distance from left*/
+    left:0;
+    /*width*/
+    width:100%;
+    /*color of the background*/
+    background:#222
+}
+
+/*paragraph in the footer*/
+footer p {
+    /*color*/
+    color:#ffffff;
+}
+
+/*list in the news*/
+#newsList{
+     /*The margin clears an area around an element (outside the border)*/
+    margin:0;
+}
+
+/*the images in news lemata*/
+#transDemo3 div {
+    /*height*/
+    height:200px;
+    /*width*/
+    width:200px;
+    display: inline-block;
+    /*text align*/
+    text-align:center;
+   /*for Chrome, Safari */
+    -webkit-transition:all 2s ease-in-out;
+    /*for Firefox */
+    -moz-transition:all 2s ease-in-out;
+    /*for Explorer*/
+    -ms-transition:all 2s ease-in-out;
+    /*transition*/
+    transition:all 2s ease-in-out
+}
+
+/*the images in news-effect*/
+#transDemo3 div:hover,#transDemo3 div.hover_effect {
+    /*for Chrome, Safari */
+    display: inline-block;
+    -webkit-transform:scale(2,2);
+    /*for Firefox */
+    -moz-transform: scale(2,2);
+    /*for Explorer*/
+    -ms-transform: scale(2,2);
+    /*transform*/
+    transform:scale(2,2)
+}
+
+/*graph histograma*/
+#histograma{
+     /*The margin clears an area around an element (outside the border)*/
+    margin-bottom:0px;
+    /*The padding clears an area around the content (inside the border) of an element. */
+    padding-bottom:0px;
+    /*height*/
+    height:100px;
+    /*width*/
+    width:100px;
+}
+
+/*multiple columns in brief of Movie*/
+.MultipleColumns{
+    /*for Chrome, Safari */
+    -webkit-column-count: 2; 
+    /*for Firefox */
+    -moz-column-count: 2; 
+    /*number of column*/
+    column-count: 2;
+    /*gap-space between the columns*/
+    /*for Chrome, Safari */
+    -webkit-column-gap: 40px; 
+    -moz-column-gap: 40px; 
+    /*for Firefox */
+    column-gap: 40px;
+}
+
+/*the clock in Premieres*/
+.clock {
+    /*width*/
+    width: 260px;
+     /*The margin clears an area around an element (outside the border)*/
+    margin-right:-500px;
+     /*The padding clears an area around the content (inside the border) of an element. */
+    padding: 0px;
+    /*The margin clears an area around an element (outside the border)*/
+    margin-top:-119px;
+    /*color*/
+    color: #FFF; 
+    /*color of background*/
+    
+}
+
+/*list in the clock*/
+.clock ul {
+    /*width*/
+    width: 250px;
+     /*The margin clears an area around an element (outside the border)*/
+    margin: 0 auto;
+     /*The padding clears an area around the content (inside the border) of an element. */
+    padding: 0;
+    /*list style*/
+    list-style: none;
+    /*text align*/
+    text-align: center
+}
+
+/*item in list in the clock*/
+.clock ul li {
+    /*display in the same row*/
+    display: inline;
+    /*font size*/
+    font-size: 3em;
+    /*text align*/
+    text-align: center;
+    /*font family*/
+    font-family: "Arial", Helvetica, sans-serif;
+    /*text shadow*/
+    text-shadow: 0 2px 5px #55c6ff, 0 3px 6px #55c6ff, 0 4px 7px #55c6ff
+}
+
+/*date in the clock*/
+#Date {
+    /*font*/
+    font-family: 'Arial', Helvetica, sans-serif;
+    font-size: 20px;
+    /*text align*/
+    text-align: center;
+    /*text shadow*/
+    text-shadow: 0 2px 5px #55c6ff, 0 3px 6px #55c6ff;
+    /*The padding clears an area around the content (inside the border) of an element. */
+    padding-bottom: 20px;
+}
+
+/*point in the clock*/
+#point {
+    /*The element is positioned relative to its normal position, so "left:20" adds 20 pixels to the element's LEFT position*/
+    position: relative;
+     /*for Firefox */
+    -moz-animation: mymove 1s ease infinite;
+    /*for Chrome, Safari */
+    -webkit-animation: mymove 1s ease infinite; 
+    /*The padding clears an area around the content (inside the border) of an element. */
+    padding-left: 10px;
+    padding-right: 10px
+}
+
+/*for Chrome, Safari */
+@-webkit-keyframes mymove
+{
+0% {opacity:1.0; text-shadow:0 0 20px #00c6ff;}
+50% {opacity:0; text-shadow:none; }
+100% {opacity:1.0; text-shadow:0 0 20px #00c6ff; }
+}
+
+/*for Firefox */
+@-moz-keyframes mymove
+{
+0% {opacity:1.0; text-shadow:0 0 20px #00c6ff;}
+50% {opacity:0; text-shadow:none; }
+100% {opacity:1.0; text-shadow:0 0 20px #00c6ff; }
+}
+
+
+
+/*this is for our sppining symbol css in our Premire*/
+#transDemo2 div {
+  height:5px;
+  width:2em;
+  display: inline-block;
+  -webkit-transition: all 2s ease-in-out;
+  -moz-transition: all 2s ease-in-out;
+  -ms-transition: all 2s ease-in-out;
+  transition: all 2s ease-in-out;
+}
+
+/*this is for effect of the star in Premire*/
+#transDemo2 div:hover, #transDemo2 div.hover_effect {
+  -webkit-transform:rotate(720deg) scale(2,2);
+  -moz-transform:rotate(720deg) scale(2,2);
+  -ms-transform:rotate(720deg) scale(2,2);
+  transform:rotate(720deg) scale(2,2);
+}
+
+

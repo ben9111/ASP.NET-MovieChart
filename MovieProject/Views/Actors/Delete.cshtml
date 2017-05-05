@@ -1,0 +1,53 @@
+﻿@model MovieProject.Models.Actor
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete Actor</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt></dt>
+        <dd>
+            <img src=@Html.DisplayFor(model => model.ActorImage) height="150" width="150">
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ActorName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActorName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gender)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.catagory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.catagory)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+         <!--anti xss validate the form so there is not manupulation, detecting attack -->
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

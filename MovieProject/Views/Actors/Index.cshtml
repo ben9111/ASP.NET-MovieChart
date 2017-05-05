@@ -1,0 +1,201 @@
+﻿<!--Actor page, a Actor searcher, a table of the Actors with 
+    the Actors properties,(the searcher actives the search with the argument inserted, a different searchers)-->
+@model IEnumerable<MovieProject.Models.Actor>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Raw(TempData["alertMessage"])
+<h2>Actors</h2>
+
+<p>
+    @if (User.Identity.Name.Equals("logout8@gmail.com"))
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+
+    <h5>
+        @Html.ActionLink("Search For trailers", "TrailerSearch")|
+        @Html.ActionLink("Search trailers and Actor", "TrailerActorSearch") |
+
+
+    </h5>
+    @using (Html.BeginForm())
+    {
+    <p>
+        <!--the "Category" a list from the server named "Category", and transfered throu the ViewBag,
+            a list contais all the categories in the database-->
+        Category: @Html.DropDownList("Category", "All") <!--list all the category drama action.. in the textbox -->
+        <!--"Gender" a list from the server with the genders from the database, moved throu the viewbag-->
+        Gender:@Html.DropDownList("Gender", "All") <!--list all the gender in the textbox when the user enter -->
+        Actor Name: @Html.TextBox("ActorName") <br />
+        <input type="submit" value="Filter" />
+    </p>
+    }
+
+    <table class="table">
+        <tr>
+            <th>
+                Actor Image
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.gender)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.catagory)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src=@Html.DisplayFor(modelItem => item.ActorImage) height="200" width="200">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActorName)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.gender)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.catagory)
+                </td>
+                <td>
+                  
+                    @if (User.Identity.Name.Equals("logout8@gmail.com"))
+                    {
+
+                         @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                        <br />
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        <br />
+                    } 
+
+                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+        
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <!--a pie chart. 
+        getting info of category color value=number of Actors in a category-->
+    <script type="text/javascript">
+        !function () {
+            var gradPie = {};
+
+            var pie = d3.layout.pie().sort(null).value(function (d) { return d.value; });
+
+            createGradients = function (defs, colors, r) {
+                var gradient = defs.selectAll('.gradient')
+                    .data(colors).enter().append("radialGradient")
+                    .attr("id", function (d, i) { return "gradient" + i; })
+                    .attr("gradientUnits", "userSpaceOnUse")
+                    .attr("cx", "0").attr("cy", "0").attr("r", r).attr("spreadMethod", "pad");
+
+                gradient.append("stop").attr("offset", "0%").attr("stop-color", function (d) { return d; });
+
+                gradient.append("stop").attr("offset", "30%")
+                    .attr("stop-color", function (d) { return d; })
+                    .attr("stop-opacity", 1);
+
+                gradient.append("stop").attr("offset", "70%")
+                    .attr("stop-color", function (d) { return "black"; })
+                    .attr("stop-opacity", 1);
+            }
+
+            gradPie.draw = function (id, data, cx, cy, r) {
+                var gPie = d3.select("#" + id).append("g")
+                    .attr("transform", "translate(" + cx + "," + cy + ")");
+                
+                createGradients(gPie.append("defs"), data.map(function (d) { return d.color; }), 2.5 * r);
+
+                gPie.selectAll("path").data(pie(data))
+                    .enter().append("path").attr("fill", function (d, i) { return "url(#gradient" + i + ")"; })
+                    .attr("d", d3.svg.arc().outerRadius(r))
+                    .each(function (d) { this._current = d; });
+            
+      
+            }
+
+            gradPie.transition = function (id, data, r) {
+                function arcTween(a) {
+                    var i = d3.interpolate(this._current, a);
+                    this._current = i(0);
+                    return function (t) { return d3.svg.arc().outerRadius(r)(i(t)); };
+                }
+
+                d3.select("#" + id).selectAll("path").data(pie(data))
+                    .transition().duration(750).attrTween("d", arcTween);
+
+            }
+          
+            this.gradPie = gradPie;
+        }();
+    </script>
+    <!-- canvas to Premiere the options in the pie-->
+
+<div id="status"></div>
+<canvas id="myCanvas" width="100" height="200" style="border:1px solid #d3d3d3;">
+   
+</canvas>
+    <!--the ajax get, getting data from json result (from mvc), prints on the canvas, draw the pie chart
+        draw the squares of the category-->
+    <script type="text/javascript">
+
+        $("#status").text("Loading the PieGraph...")
+        $.ajax({
+            type: 'GET',
+            url: '/Actors/getCategors',
+            contentType: 'application/json; charset=utf-8',
+            
+            success: function (data) { //if its sucess this is the function will run  function in javascript data
+                //  var mikra = d3.select("body").append("mikra").attr("width", 700).attr("height", 30);
+                var svg = d3.select("body").append("svg").attr("width", 700).attr("height", 700);
+                svg.append("g").attr("id", "salespie");
+                // mikra.append("g").attr("id", "salespieMikra");
+                gradPie.draw("salespie", data, 300, 300, 300);
+                //  gradPie.draw("salespieMikra", data, 300, 300, 200);
+              
+               
+
+
+
+                var c = document.getElementById("myCanvas");
+                var ctx = c.getContext("2d");
+                
+
+           
+                for (var i in data) {
+                   
+                    ctx.fillStyle = data[i].color;
+                    ctx.fillRect(2 , 2 + i * 20, 100, 20);
+                    ctx.strokeText(data[i].label + "\n", 10 , 20+i*20);
+                    ctx.stroke();
+                    
+                    $("#status").text("")
+
+                 
+                }
+
+            },
+            failure: function (msg) {
+                alert("fail");
+                $('#output').text(msg);
+            }
+        });
+    </script>
+
+
